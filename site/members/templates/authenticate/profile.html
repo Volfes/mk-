@@ -1,0 +1,45 @@
+{% extends "authenticate\base.html" %}
+
+{% block title %} Profil {% endblock %}
+
+{% block content %}
+
+  <h1>Witaj {{ request.user.username }}</h1>
+
+  {% if messages %}
+    {% for message in messages %}
+      {{message}}
+    {% endfor %}
+  {% endif %}
+
+<br/>
+
+    <button id="Wyloguj">Wyloguj</button>
+    <script type="text/javascript">
+      document.getElementById("Wyloguj").onclick = function () {
+          location.href = "{% url 'logout_user' %}";
+      };
+    </script>
+
+    <button id="Zmień hasło">Zmień hasło</button>
+    <script type="text/javascript">
+      document.getElementById("Zmień hasło").onclick = function () {
+          location.href = "{% url 'change_password' %}";
+      };
+    </script>
+
+    <button id="Zmień email">Zmień email</button>
+    <script type="text/javascript">
+      document.getElementById("Zmień email").onclick = function () {
+          location.href = "{% url 'change_email' %}";
+      };
+    </script>
+
+    <button id="Home">Strona główna</button>
+    <script type="text/javascript">
+    document.getElementById("Home").onclick = function () {
+        location.href = "{% url 'home_page' %}";
+    };
+    </script>
+
+{% endblock %}

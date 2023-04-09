@@ -1,0 +1,29 @@
+{% extends "authenticate\base.html" %}
+
+{% block title %} Zmień email {% endblock %}
+
+{% block content %}
+
+    <h1> Zmień email </h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+            <div>
+                <label for="email"> {{form}} </label>
+            </div>
+        <br/>
+        <button id="Zatwierdź">Zatwierdź</button>
+        <script type="text/javascript">
+            document.getElementById("Zatwierdź").onclick = function () {
+            form.submit();
+            };
+        </script>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            {{message}}
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

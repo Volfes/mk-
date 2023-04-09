@@ -1,0 +1,49 @@
+{% extends "authenticate\base.html" %}
+
+{% block title %} Zaloguj się {% endblock %}
+
+{% block content %}
+
+  <h1>Zaloguj się</h1>
+  <br/>
+  <form action="" method="POST">
+    {% csrf_token %}
+    <div>
+        <label>Nazwa użytkownika:</label>
+        <input type="text" name="username" required="">
+    </div>
+    <br/>
+    <div>
+        <label>Hasło:</label>
+        <input type="password" name="password" required="">
+    </div>
+    <br/>
+    <!-- <input type="submit" value="Submit"> -->
+    
+    <button id="Zatwierdź">Zatwierdź</button>
+    <script type="text/javascript">
+      document.getElementById("Zatwierdź").onclick = function () {
+        form.submit();
+      };
+    </script>
+
+    <button id="Zarejestruj" class="Invalid-button">Nie mam konta</button>
+    <script type="text/javascript">
+      document.getElementById("Zarejestruj").onclick = function () {
+          location.href = "{% url 'register_user' %}";
+      };
+    </script>
+
+  </form>
+
+  {% if messages %}
+
+    {% for message in messages %}
+
+      {{message}}
+
+    {% endfor %}
+
+  {% endif %}
+
+{% endblock %}

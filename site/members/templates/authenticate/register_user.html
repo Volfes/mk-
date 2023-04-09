@@ -1,0 +1,49 @@
+{% extends "authenticate\base.html" %}
+
+{% block title %} Rejestracja {% endblock %}
+
+{% if form.errors %}
+  <p> Błąd podczas tworzenia formularza </p>
+{% endif %}
+
+{% block content %}
+
+  <h1>Zarejestruj się</h1>
+  <br/>
+  <form action="{% url 'register_user' %}" method="POST">
+    {% csrf_token %}
+      <div>
+        {% for field in form %}
+          <div class="form-control" {% if field.errors %} errors {% endif %}>
+            {{ field.label_tag }}
+            {{ field }}
+            {{ field.errors }}
+          </div>
+          <br/>
+        {% endfor %}
+      </div>
+    <button id="Zatwierdź">Zatwierdź</button>
+    <script type="text/javascript">
+      document.getElementById("Zatwierdź").onclick = function () {
+        form.submit();
+      };
+    </script>
+
+    <button id="Zaloguj" class="Valid-button">Posiadam konto</button>
+    <script type="text/javascript">
+      document.getElementById("Zaloguj").onclick = function () {
+          location.href = "{% url 'login_user' %}";
+      };
+    </script>
+    
+  </form>
+
+  {% if messages %}
+
+    {% for message in messages %}
+      {{message}}
+    {% endfor %}
+    
+  {% endif %}
+
+{% endblock %}

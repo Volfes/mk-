@@ -1,0 +1,43 @@
+{% extends "authenticate\base.html" %}
+
+{% block title %} Mockup Maker Imker {% endblock %}
+
+{% block content %}
+
+  <h1>Witaj {{ request.user.username }}</h1>
+
+  {% if messages %}
+    {% for message in messages %}
+      {{message}}
+    {% endfor %}
+  {% endif %}
+
+<br/>
+
+  {% if user.is_authenticated %}
+
+  <button id="Profil">Profil</button>
+  <script type="text/javascript">
+    document.getElementById("Profil").onclick = function () {
+        location.href = "{% url 'profile' %}";
+    };
+  </script>
+  {% else %}
+
+    <button id="Zarejestruj">Zarejestruj</button>
+    <script type="text/javascript">
+      document.getElementById("Zarejestruj").onclick = function () {
+          location.href = "{% url 'register_user' %}";
+      };
+    </script>
+
+    <button id="Zaloguj">Zaloguj</button>
+    <script type="text/javascript">
+      document.getElementById("Zaloguj").onclick = function () {
+          location.href = "{% url 'login_user' %}";
+      };
+    </script>
+
+  {% endif %}
+
+{% endblock %}
